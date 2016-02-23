@@ -25,8 +25,10 @@
 #include <stdint.h>
 #include <stdio.h>
 //
-#define  _MODEL_B2
-//#define _MODEL_BP
+//
+//
+//#define  _MODEL_B2
+#define _MODEL_BP
 // verbose ?
 //#define _VERBOSE
 //
@@ -52,9 +54,13 @@ int main(int argc, char* argv[])
 	uint8_t txb[256];
 	//
 	//
+	//printf("performing bbhalt..\n");fflush(stdout);
+	//
+	//return 0;
 	//
 	if(CHAN_setup("BBHALT",1)!=0) { printf("Error opening Chantilly, quit\n"); CHAN_close();exit(-1);} // try a close
 	// get args
+	//printf("BBHALT..\n");fflush(stdout);	
 	errors=0;
 	if(argc==3)	// arg[1]= 0/1 : host only or host+chantilly
 	{	
@@ -117,9 +123,7 @@ int main(int argc, char* argv[])
 	// execute poweroff with selected mode or default, 0xBB's ram values
 	//
 	CHAN_command(_BB_BOARD,0x06);
-#ifdef _VERBOSE	
-		printf("Shutting down the system and BusBoard\n");fflush(stdout);
-#endif
+	printf("Shutting down the system and BusBoard\n");fflush(stdout);
 	//
 	usleep(100000);
 	CHAN_close();
